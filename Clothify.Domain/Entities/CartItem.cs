@@ -2,9 +2,9 @@
 {
     public class CartItem
     {
-        public int CartID { get; set; }
-        public int ProductID { get; set; }
+        public Guid CartId { get; set; }
+        public Guid ProductId { get; set; }
         public int Quantity { get; set; }
-        public int AddedAt { get; set; }
+        public DateTime AddedAt { get; set; } = DateTime.UtcNow;
     }
 }

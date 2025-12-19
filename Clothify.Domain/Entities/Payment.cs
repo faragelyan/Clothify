@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Clothify.Domain.Enums;
 
 namespace Clothify.Domain.Entities
 {
-    internal class Payment
+    public class Payment
     {
+        public Guid PaymentId { get; set; }
+        public decimal Amount { get; set; }
+        public string Currency { get; set; } = null!;
+        public PaymentStatus Status { get; set; }
+        public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
+        public PaymentMethod PaymentMethod { get; set; } 
+        public Guid OrderId { get; set; }
     }
 }

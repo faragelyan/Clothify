@@ -2,8 +2,9 @@
 {
     public class ShoppingCart
     {
-        public Guid CartID { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public Guid CartId { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public decimal TotalAmount { get; set; }
+        public Guid UserId { get; set; }
     }
 }

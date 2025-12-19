@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Clothify.Domain.Entities
+﻿namespace Clothify.Domain.Entities
 {
-    internal class Review
+    public class Review
     {
+        public Guid ReviewId { get; set; }
+        public byte Rating { get; set; }
+        public string? Comment { get; set; }
+        public DateTime ReviewDate { get; set; }
+        public Guid UserId { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

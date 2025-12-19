@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Clothify.Domain.Entities
+﻿namespace Clothify.Domain.Entities
 {
-    internal class UserPhone
+    public class UserPhone
     {
+        public Guid PhoneId { get; set; }
+        public string PhoneNumber { get; set; } = null!;
+        public string Type { get; set; } = null!;
+        public Guid UserId { get; set; }
     }
 }

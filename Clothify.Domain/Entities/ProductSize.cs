@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Clothify.Domain.Entities
+﻿namespace Clothify.Domain.Entities
 {
-    internal class ProductSize
+    public class ProductSize
     {
+        public Guid ProductId { get; set; }
+        public Guid SizeId { get; set; }
     }
 }
