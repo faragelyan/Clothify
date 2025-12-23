@@ -10,6 +10,8 @@ namespace Clothify.Domain.Entities
         public PaymentStatus Status { get; set; }
         public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
         public PaymentMethod PaymentMethod { get; set; } 
+
         public Guid OrderId { get; set; }
+        public Order Order { get; set; }
     }
 }
