@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
     <Folder Include="FluentValidation\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Mapping\" />
     <Folder Include="Services\" />
   </ItemGroup>

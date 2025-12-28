@@ -13,6 +13,19 @@ namespace Clothify.Infrastructure.Configurations
             builder.Property(u => u.FirstName).IsRequired().HasMaxLength(50);
             builder.Property(u => u.LastName).IsRequired().HasMaxLength(50);
             builder.Property(u => u.CreatedAt).IsRequired();
+            builder.Property(u => u.ProfileImageUrl).HasMaxLength(512);
+            builder.Property(u => u.DateOfBirth)
+                    .HasConversion(
+                    v => v.ToDateTime(TimeOnly.MinValue),
+                    v => DateOnly.FromDateTime(v))
+                    .IsRequired();
+            builder.Property(u => u.RefreshToken)
+                   .HasMaxLength(500)      
+                   .IsUnicode(false)       
+                   .IsRequired(false);    
+            builder.Property(u => u.RefreshTokenExpiryTime)
+                   .IsRequired(false);   
+
 
             builder.HasMany(u => u.UserPhones)
                    .WithOne(p => p.AppUser)

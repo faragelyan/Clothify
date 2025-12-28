@@ -4,6 +4,7 @@ using Clothify.Infrastructure.Peresistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clothify.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251228151056_seedroles")]
+    partial class seedroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,9 +64,6 @@ namespace Clothify.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -104,18 +104,6 @@ namespace Clothify.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfileImageUrl")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("RefreshToken")
-                        .HasMaxLength(500)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<DateTime?>("RefreshTokenExpiryTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -147,9 +135,8 @@ namespace Clothify.Infrastructure.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b7785c72-ab51-4b29-8c7f-e7536af0054a",
-                            CreatedAt = new DateTime(2025, 12, 28, 17, 25, 23, 876, DateTimeKind.Utc).AddTicks(5022),
-                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "999162d5-c03e-4d5c-a013-e6c586635bce",
+                            CreatedAt = new DateTime(2025, 12, 28, 15, 10, 54, 538, DateTimeKind.Utc).AddTicks(704),
                             Email = "faragelyan76@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Farag",
@@ -157,9 +144,9 @@ namespace Clothify.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FARAGELYAN76@GMAIL.COM",
                             NormalizedUserName = "FARAG ELYAN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELrA2Ns7et/0IrtvxXq1kq3Y7APsACNS3DVl8dcCbCfBm1I9GLp8oqDdnEi8ZBCJ3Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAHeZRZLEiRY7arczl/U+Q2l/lNelXn5UoH1OaXefY+zckcDqTOMiCc3t2sbAcea/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1bd3f485-00c0-4f29-8b41-14090debbf1c",
+                            SecurityStamp = "67278000-3bfb-48cd-afe6-35c643d5514c",
                             TwoFactorEnabled = false,
                             UserName = "farag elyan"
                         });

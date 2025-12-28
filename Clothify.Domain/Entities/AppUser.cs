@@ -6,6 +6,10 @@ namespace Clothify.Domain.Entities
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateOnly DateOfBirth { get; set; }
+        public string? ProfileImageUrl { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
 
         public ICollection<UserPhone> UserPhones { get; set; } = new List<UserPhone>();
         public ICollection<Address> Addresses { get; set; } = new List<Address>();
