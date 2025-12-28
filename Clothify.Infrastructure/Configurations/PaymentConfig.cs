@@ -10,7 +10,7 @@ namespace Clothify.Infrastructure.Configurations
         {
             builder.HasKey(p => p.PaymentId);
 
-            builder.Property(p => p.Amount).IsRequired();
+            builder.Property(p => p.Amount).IsRequired().HasPrecision(18, 2);
             builder.Property(p => p.Currency).IsRequired();
             builder.Property(p => p.Status).IsRequired();
             builder.Property(p => p.PaymentDate).IsRequired();

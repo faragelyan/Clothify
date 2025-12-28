@@ -32,7 +32,7 @@ namespace Clothify.Infrastructure.Configurations
             builder.HasMany(u => u.Reviews)
                    .WithOne(r => r.AppUser)
                    .HasForeignKey(r => r.UserId)
-                   .OnDelete(DeleteBehavior.SetNull);
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(u => u.Reports)
                    .WithOne(r => r.AppUser)

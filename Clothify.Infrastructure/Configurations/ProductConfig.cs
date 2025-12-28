@@ -11,7 +11,7 @@ namespace Clothify.Infrastructure.Configurations
             builder.HasKey(p => p.ProductId);
             builder.Property(p => p.Name).IsRequired();
             builder.Property(p => p.Description).IsRequired();
-            builder.Property(p => p.Price).IsRequired();
+            builder.Property(p => p.Price).IsRequired().HasPrecision(18, 2);
             builder.Property(p => p.Stock).IsRequired();
             builder.Property(p => p.Color).IsRequired();
             builder.Property(p => p.ImageUrl).IsRequired();

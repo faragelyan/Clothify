@@ -11,7 +11,7 @@ namespace Clothify.Infrastructure.Configurations
             builder.HasKey(oi => new { oi.OrderId, oi.ProductId });
 
             builder.Property(oi => oi.Quantity).IsRequired();
-            builder.Property(oi => oi.Price).IsRequired();
+            builder.Property(oi => oi.Price).IsRequired().HasPrecision(18, 2);
 
             builder.HasIndex(oi => oi.ProductId);
         }

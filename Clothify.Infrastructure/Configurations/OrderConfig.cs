@@ -12,7 +12,7 @@ namespace Clothify.Infrastructure.Configurations
 
             builder.Property(o => o.OrderDate).IsRequired();
             builder.Property(o => o.Status).IsRequired();
-            builder.Property(o => o.TotalAmount).IsRequired();
+            builder.Property(o => o.TotalAmount).IsRequired().HasPrecision(18, 2);
 
             builder.HasMany(o => o.Payments)
                    .WithOne(p => p.Order)

@@ -1,4 +1,7 @@
+using Clothify.Domain.Entities;
+using Clothify.Infrastructure.Peresistence;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +13,13 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 //-----------------------------Identity-------------------
 
-/*builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
+builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();*/
+    .AddDefaultTokenProviders();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 

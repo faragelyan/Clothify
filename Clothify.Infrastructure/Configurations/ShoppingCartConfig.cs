@@ -11,7 +11,7 @@ namespace Clothify.Infrastructure.Configurations
             builder.HasKey(c => c.CartId);
 
             builder.Property(c => c.CreatedAt).IsRequired();
-            builder.Property(c => c.TotalAmount).IsRequired();
+            builder.Property(c => c.TotalAmount).IsRequired().HasPrecision(18, 2);
 
             builder.HasOne(c => c.AppUser)
                .WithOne()
