@@ -29,6 +29,7 @@ namespace Clothify.Infrastructure.Peresistence
         public DbSet<UserPhone> UserPhones { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<PendingVerification> PendingVerifications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

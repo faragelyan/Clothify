@@ -3,7 +3,6 @@ using Clothify.Domain.Interfaces.Pagination;
 using Clothify.Infrastructure.Peresistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Clothify.Infrastructure.Repositories

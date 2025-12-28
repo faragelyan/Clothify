@@ -10,7 +10,7 @@ namespace Clothify.Infrastructure.Configurations
         {
             builder.HasKey(c => c.CategoryId);
 
-            builder.Property(c => c.Name).IsRequired().HasMaxLength(100); 
+            builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
             builder.Property(c => c.Description).IsRequired().HasMaxLength(500);
 
             builder.HasMany(c => c.Products)

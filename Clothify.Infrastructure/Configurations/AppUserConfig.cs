@@ -20,11 +20,11 @@ namespace Clothify.Infrastructure.Configurations
                     v => DateOnly.FromDateTime(v))
                     .IsRequired();
             builder.Property(u => u.RefreshToken)
-                   .HasMaxLength(500)      
-                   .IsUnicode(false)       
-                   .IsRequired(false);    
+                   .HasMaxLength(500)
+                   .IsUnicode(false)
+                   .IsRequired(false);
             builder.Property(u => u.RefreshTokenExpiryTime)
-                   .IsRequired(false);   
+                   .IsRequired(false);
 
 
             builder.HasMany(u => u.UserPhones)

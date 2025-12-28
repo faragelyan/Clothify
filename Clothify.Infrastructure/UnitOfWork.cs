@@ -28,6 +28,7 @@ namespace Clothify.Infrastructure
             ShoppingCarts = new GenericRepository<ShoppingCart>(_context);
             Sizes = new GenericRepository<Size>(_context);
             UserPhones = new GenericRepository<UserPhone>(_context);
+            PendingVerifications = new GenericRepository<PendingVerification>(_context);
         }
 
         public IGenericRepository<Address> Addresses { get; private set; }
@@ -45,6 +46,7 @@ namespace Clothify.Infrastructure
         public IGenericRepository<ShoppingCart> ShoppingCarts { get; private set; }
         public IGenericRepository<Size> Sizes { get; private set; }
         public IGenericRepository<UserPhone> UserPhones { get; private set; }
+        public IGenericRepository<PendingVerification> PendingVerifications { get; private set; }
 
         public async Task<int> CommitAsync()
         {

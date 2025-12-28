@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Clothify.Domain.Entities;
+﻿using Clothify.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Clothify.Infrastructure.Configurations
 {
@@ -12,7 +12,7 @@ namespace Clothify.Infrastructure.Configurations
             builder.Property(a => a.FullAddress).IsRequired();
             builder.Property(a => a.AddressType).IsRequired();
 
-            builder.HasMany(a => a.Orders)            
+            builder.HasMany(a => a.Orders)
                    .WithOne(o => o.Address)
                    .HasForeignKey(o => o.AddressId)
                    .OnDelete(DeleteBehavior.Restrict);

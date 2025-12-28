@@ -18,6 +18,7 @@ namespace Clothify.Domain.Interfaces
         IGenericRepository<ShoppingCart> ShoppingCarts { get; }
         IGenericRepository<Size> Sizes { get; }
         IGenericRepository<UserPhone> UserPhones { get; }
+        IGenericRepository<PendingVerification> PendingVerifications { get; }
 
         Task<int> CommitAsync();
     }

@@ -147,8 +147,8 @@ namespace Clothify.Infrastructure.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b7785c72-ab51-4b29-8c7f-e7536af0054a",
-                            CreatedAt = new DateTime(2025, 12, 28, 17, 25, 23, 876, DateTimeKind.Utc).AddTicks(5022),
+                            ConcurrencyStamp = "1e5b2b15-b18b-410a-ae19-6738667aa9c2",
+                            CreatedAt = new DateTime(2025, 12, 28, 22, 3, 2, 936, DateTimeKind.Utc).AddTicks(4111),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "faragelyan76@gmail.com",
                             EmailConfirmed = true,
@@ -157,9 +157,9 @@ namespace Clothify.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FARAGELYAN76@GMAIL.COM",
                             NormalizedUserName = "FARAG ELYAN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELrA2Ns7et/0IrtvxXq1kq3Y7APsACNS3DVl8dcCbCfBm1I9GLp8oqDdnEi8ZBCJ3Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJWVKQJClGBW9HJ61KVpMQy9P/7NnapV23tLsktIy0KaCt36ClTZu/Okrv7oDlt6qQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1bd3f485-00c0-4f29-8b41-14090debbf1c",
+                            SecurityStamp = "b2c624d3-ac98-445d-8e18-cac6f6a209d9",
                             TwoFactorEnabled = false,
                             UserName = "farag elyan"
                         });
@@ -317,6 +317,35 @@ namespace Clothify.Infrastructure.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("Clothify.Domain.Entities.PendingVerification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Expiry")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsConfirmed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("VerificationCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PendingVerifications", (string)null);
                 });
 
             modelBuilder.Entity("Clothify.Domain.Entities.Product", b =>
