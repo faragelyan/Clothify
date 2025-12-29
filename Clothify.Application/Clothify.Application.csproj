@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FluentValidation\User\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

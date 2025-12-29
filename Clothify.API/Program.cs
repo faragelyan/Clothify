@@ -1,4 +1,5 @@
 using AutoMapper;
+using Clothify.Application.FluentValidation.Auth;
 using Clothify.Application.Interfaces;
 using Clothify.Domain.Entities;
 using Clothify.Domain.Interfaces;
@@ -31,7 +32,7 @@ builder.Services.AddControllers()
 // ---------------------- FluentValidation ----------------------
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddValidatorsFromAssembly(typeof(Clothify.Application.DTOs.Auth.StartRegisterRequestDto).Assembly);
 
 // ---------------------- Swagger ----------------------
 builder.Services.AddEndpointsApiExplorer();

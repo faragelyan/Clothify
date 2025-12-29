@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Google.Apis.Auth;
-using Microsoft.AspNetCore.Identity;
 using Clothify.Application.DTOs;
 using Clothify.Application.DTOs.Auth;
 using Clothify.Application.DTOs.User;
 using Clothify.Application.Interfaces;
 using Clothify.Domain.Entities;
 using Clothify.Domain.Interfaces;
+using Google.Apis.Auth;
+using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
