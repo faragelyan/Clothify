@@ -7,7 +7,7 @@ namespace Clothify.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class BrandController : ControllerBase
     {
         private readonly IBrandService _brandService;
@@ -22,9 +22,9 @@ namespace Clothify.API.Controllers
         {
             var result = await _brandService.AddAsync(dto);
             if (!result.Success)
-                return BadRequest(result.Error);
+                return BadRequest(new { message = result.Error });
 
-            return Ok(result.Data);
+            return Ok(new { message = "Brand created successfully.", data = result.Data });
         }
 
         [HttpPut]
@@ -32,9 +32,9 @@ namespace Clothify.API.Controllers
         {
             var result = await _brandService.UpdateAsync(dto);
             if (!result.Success)
-                return BadRequest(result.Error);
+                return BadRequest(new { message = result.Error });
 
-            return Ok(result.Data);
+            return Ok(new { message = "Brand updated successfully.", data = result.Data });
         }
 
         [HttpDelete("{id}")]
@@ -42,9 +42,9 @@ namespace Clothify.API.Controllers
         {
             var result = await _brandService.RemoveAsync(id);
             if (!result.Success)
-                return BadRequest(result.Error);
+                return BadRequest(new { message = result.Error });
 
-            return Ok(result.Data);
+            return Ok(new { message = "Brand deleted successfully." });
         }
 
         [HttpGet]
@@ -52,9 +52,9 @@ namespace Clothify.API.Controllers
         {
             var result = await _brandService.GetAllAsync();
             if (!result.Success)
-                return BadRequest(result.Error);
+                return BadRequest(new { message = result.Error });
 
-            return Ok(result.Data);
+            return Ok(new { message = "Brands retrieved successfully.", data = result.Data });
         }
 
         [HttpGet("{id}")]
@@ -62,9 +62,9 @@ namespace Clothify.API.Controllers
         {
             var result = await _brandService.GetAsync(id);
             if (!result.Success)
-                return NotFound(result.Error);
+                return NotFound(new { message = result.Error });
 
-            return Ok(result.Data);
+            return Ok(new { message = "Brand retrieved successfully.", data = result.Data });
         }
     }
 }
