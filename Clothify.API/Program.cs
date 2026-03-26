@@ -7,7 +7,6 @@ using Clothify.Domain.Interfaces;
 using Clothify.Infrastructure;
 using Clothify.Infrastructure.AuthenticationServices;
 using Clothify.Infrastructure.Peresistence;
-using Clothify.Infrastructure.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -105,6 +104,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ICartItemService, CartItemService>();
 
 // ---------------------- EF Core & Identity ----------------------
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -117,7 +117,6 @@ builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
 
 // ---------------------- UnitOfWork ----------------------
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 
 // ---------------------- AutoMapper ----------------------
 builder.Services.AddAutoMapper(typeof(Clothify.Application.Mapping.UserProfile).Assembly);
