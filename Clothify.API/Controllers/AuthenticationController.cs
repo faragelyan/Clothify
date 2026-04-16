@@ -1,4 +1,4 @@
-﻿using Clothify.Application.DTOs.Auth;
+using Clothify.Application.DTOs.Auth;
 using Clothify.Application.DTOs.User;
 using Clothify.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -127,7 +127,6 @@ namespace Clothify.API.Controllers
         }
 
         // Refresh Token
-        [Authorize]
         [HttpPost("refresh_token")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDto request)
         {

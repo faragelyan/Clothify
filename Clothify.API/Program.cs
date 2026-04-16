@@ -71,6 +71,15 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+// ---------------------- EF Core & Identity ----------------------
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
 // ---------------------- JWT Configuration ----------------------
 var JwtOptions = configuration.GetSection("JWT").Get<JwtOptions>();
 builder.Services.AddSingleton(JwtOptions);
@@ -104,16 +113,9 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartItemService, CartItemService>();
-
-// ---------------------- EF Core & Identity ----------------------
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-);
-
-builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // ---------------------- UnitOfWork ----------------------
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -138,15 +140,12 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // ---------------------- Middleware ----------------------
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Clothify API V1");
-        options.RoutePrefix = string.Empty; // Swagger UI at root (/)
-    });
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Clothify API V1");
+    options.RoutePrefix = string.Empty; // Swagger UI at root (/)
+});
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");

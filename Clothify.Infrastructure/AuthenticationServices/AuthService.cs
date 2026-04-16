@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Clothify.Application.DTOs;
 using Clothify.Application.DTOs.Auth;
 using Clothify.Application.DTOs.User;
@@ -241,12 +241,18 @@ namespace Clothify.Infrastructure.AuthenticationServices
         // -------------------------
         private async Task<LoginResponseDto> GenerateLoginResponseAsync(AppUser user)
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}")
             };
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var accessToken = _jwtService.GenerateAccessToken(claims);
             var refreshToken = _jwtService.GenerateRefreshToken();
