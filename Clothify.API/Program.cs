@@ -116,6 +116,14 @@ builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartItemService, CartItemService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductSizeService, ProductSizeService>();
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+builder.Services.AddScoped<IUserPhoneService, UserPhoneService>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 
 // ---------------------- UnitOfWork ----------------------
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
