@@ -126,22 +126,22 @@ namespace Clothify.Infrastructure.PaymentGateways
             try
             {
                 var amount_cents = payloadObj.amount_cents.ToString();
-                var created_at = ""; // Usually provided, but omitted here due to DTO mapping missing it.
+                var created_at = payloadObj.created_at ?? ""; 
                 var currency = payloadObj.currency ?? "";
-                var error_occured = "false";
-                var has_parent_transaction = "false";
+                var error_occured = payloadObj.error_occured.ToString().ToLower();
+                var has_parent_transaction = payloadObj.has_parent_transaction.ToString().ToLower();
                 var objId = payloadObj.id.ToString();
                 var integration_id = payloadObj.integration_id.ToString();
-                var is_3d_secure = "false";
-                var is_auth = "false";
-                var is_capture = "false";
-                var is_refunded = "false";
-                var is_standalone_payment = "false";
-                var is_voided = "false";
+                var is_3d_secure = payloadObj.is_3d_secure.ToString().ToLower();
+                var is_auth = payloadObj.is_auth.ToString().ToLower();
+                var is_capture = payloadObj.is_capture.ToString().ToLower();
+                var is_refunded = payloadObj.is_refunded.ToString().ToLower();
+                var is_standalone_payment = payloadObj.is_standalone_payment.ToString().ToLower();
+                var is_voided = payloadObj.is_voided.ToString().ToLower();
                 var orderId = payloadObj.order?.id.ToString() ?? "";
                 var owner = payloadObj.owner.ToString();
                 var pending = payloadObj.pending.ToString().ToLower();
-                var source_data_pan = "";
+                var source_data_pan = payloadObj.source_data?.pan ?? "";
                 var source_data_sub_type = payloadObj.source_data?.sub_type ?? "";
                 var source_data_type = payloadObj.source_data?.type ?? "";
                 var success = payloadObj.success.ToString().ToLower();

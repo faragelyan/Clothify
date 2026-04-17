@@ -4,6 +4,7 @@ using Clothify.Application.DTOs.Order;
 using Clothify.Application.Interfaces;
 using Clothify.Domain.Entities;
 using Clothify.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clothify.Application.Services
 {
@@ -32,12 +33,44 @@ namespace Clothify.Application.Services
                 return Result<Guid>.Fail("Address not found");
             }
 
+            // Secure Pricing Calculation & Lifecycle Management
+            var cart = await _unitOfWork.ShoppingCarts.GetSingleEntityAsync(c => c.UserId == dto.UserId);
+            if (cart == null) return Result<Guid>.Fail("Shopping cart not found");
+
+            var cartItems = await _unitOfWork.CartItems.GetAllEntitiesAsync(
+                filter: ci => ci.CartId == cart.CartId,
+                includes: q => q.Include(ci => ci.Product)
+            );
+
+            if (!cartItems.Any()) return Result<Guid>.Fail("Shopping cart is empty");
+
+            var secureTotalAmount = cartItems.Sum(ci => (ci.Product?.Price ?? 0m) * ci.Quantity);
+
             var order = _mapper.Map<Order>(dto);
             order.OrderDate = DateTime.UtcNow;
+            order.TotalAmount = secureTotalAmount; // Overwrite DTO input to absolutely prevent fraudulent price manipulation
 
             var added = await _unitOfWork.Orders.AddAsync(order);
             if (!added)
                 return Result<Guid>.Fail("Failed to add order");
+
+            // Convert Cart Items into immutable Order Items
+            foreach (var item in cartItems)
+            {
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.OrderId,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Product?.Price ?? 0m
+                };
+                await _unitOfWork.OrderItems.AddAsync(orderItem);
+            }
+
+            // Flush the cart correctly
+            _unitOfWork.CartItems.DeleteRange(cartItems);
+            cart.TotalAmount = 0m;
+            _unitOfWork.ShoppingCarts.Update(cart);
 
             await _unitOfWork.CommitAsync();
             return Result<Guid>.Ok(order.OrderId);

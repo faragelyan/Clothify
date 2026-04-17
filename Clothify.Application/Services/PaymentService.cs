@@ -103,6 +103,16 @@ namespace Clothify.Application.Services
             var order = await _unitOfWork.Orders.GetSingleEntityAsync(filter: o => o.OrderId == dto.OrderId);
             if (order == null) return Result<string>.Fail("Order not found");
 
+            // 0. Protect against double-charging if the order is already paid natively or via completed payments
+            var successfulPayment = await _unitOfWork.Payments.GetSingleEntityAsync(
+                 filter: p => p.OrderId == dto.OrderId && p.Status == PaymentStatus.Completed
+            );
+
+            if (successfulPayment != null || order.Status == OrderStatus.Processing)
+            {
+                 return Result<string>.Fail("This order has already been successfully paid.");
+            }
+
             // 1. Record the intent to pay locally first to obtain the strict natively database-bound Guid
             var payment = new Payment
             {

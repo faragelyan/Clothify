@@ -175,20 +175,21 @@ namespace Clothify.Infrastructure.AuthenticationServices
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null) return false;
 
-            var link = $"https://yourfrontend.com/reset-password?token={user.Id}";
+            var rawToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedToken = Uri.EscapeDataString(rawToken);
+
+            var link = $"https://yourfrontend.com/reset-password?email={Uri.EscapeDataString(user.Email!)}&token={encodedToken}";
             var emailBody = $"<p>Click <a href='{link}'>here</a> to reset your password. This link expires in 30 minutes.</p>";
             return await _emailService.SendEmailAsync(email, "Clothify - Password Reset", emailBody, link);
         }
 
         public async Task<bool> ResetPasswordAsync(ResetPasswordRequestDto request)
         {
-            var user = await _unitOfWork.AppUsers.FindAsync(request.Token);
+            var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null) return false;
 
-            user.PasswordHash = _passwordHasher.HashPassword(user, request.NewPassword);
-            _unitOfWork.AppUsers.Update(user);
-            await _unitOfWork.CommitAsync();
-            return true;
+            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.NewPassword);
+            return result.Succeeded;
         }
 
         public async Task<Result<bool>> ChangePasswordAsync(ChangePasswordRequestDto request)
