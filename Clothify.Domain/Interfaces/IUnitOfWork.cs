@@ -1,4 +1,4 @@
-﻿using Clothify.Domain.Entities;
+using Clothify.Domain.Entities;
 namespace Clothify.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable

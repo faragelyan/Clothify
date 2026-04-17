@@ -11,6 +11,9 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Polly;
+using Polly.Extensions.Http;
+using Clothify.Infrastructure.PaymentGateways;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -110,6 +113,11 @@ builder.Services.AddSingleton(SmtpSettings);
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 // ---------------------- Authentication Service ----------------------
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IPaymentGatewayService, PaymobGatewayService>()
+    .AddPolicyHandler(HttpPolicyExtensions
+        .HandleTransientHttpError()
+        .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))));
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
@@ -124,6 +132,7 @@ builder.Services.AddScoped<ISizeService, SizeService>();
 builder.Services.AddScoped<IUserPhoneService, UserPhoneService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 // ---------------------- UnitOfWork ----------------------
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
