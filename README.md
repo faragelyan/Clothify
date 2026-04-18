@@ -123,10 +123,4 @@ The backend exposes a wide array of functional endpoints logically grouped by co
 
 ---
 
-## Next Steps (Frontend)
-
-This backend repository is designed to comfortably connect with single-page applications. Ongoing implementations incorporate modern frameworks (React / Angular) specifically architected to consume these endpoints efficiently utilizing built-in state management and robust caching.
-
----
-
 *Built utilizing comprehensive Clean Architecture concepts.*
