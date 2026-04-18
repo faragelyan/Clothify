@@ -133,6 +133,7 @@ builder.Services.AddScoped<IUserPhoneService, UserPhoneService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IAppUserService, AppUserService>();
 
 // ---------------------- UnitOfWork ----------------------
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
