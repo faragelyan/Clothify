@@ -18,7 +18,6 @@ Clothify is a robust, scalable, and modern E-commerce backend designed to handle
   - [Prerequisites](#prerequisites)
   - [Installation & Configuration](#installation--configuration)
 - [API Overview](#api-overview)
-- [Next Steps (Frontend)](#next-steps-frontend)
 
 ---
 
