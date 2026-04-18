@@ -111,13 +111,27 @@ The presentation layer. Exposes RESTful API endpoints securely to the public int
 
 The backend exposes a wide array of functional endpoints logically grouped by controllers:
 
-- `/api/Authentication`: Handling Login, User Registration, Token Refresh, and Password resets.
-- `/api/Product`: Browsing, Filtering, creating and managing individual retail items.
-- `/api/Brand`: CRUD interface for item manufacturers.
-- `/api/ShoppingCart`: Modifying cart items representing the pre-checkout stage.
-- `/api/Order`: Placing and tracking active shipment purchases.
-- `/api/Payment`: Communicating Webhook calls from Paymob transactions.
-- `/api/User`: Complete management of User profile details.
+- **Authentication & User Management:**
+  - `/api/Authentication`: Handling Login, User Registration, Token Refresh, and Password resets.
+  - `/api/User`: Complete management of User profile details.
+  - `/api/Address`: Managing user delivery and billing addresses.
+  - `/api/UserPhone`: Handling associated phone numbers for users.
+- **Catalogue & Inventory:**
+  - `/api/Category`: Managing product categories.
+  - `/api/Brand`: CRUD interface for item manufacturers.
+  - `/api/Size`: Global catalogue of sizes.
+  - `/api/Product`: Browsing, Filtering, creating and managing individual retail items.
+  - `/api/ProductSize`: Managing size availability per product.
+- **Shopping Cart:**
+  - `/api/ShoppingCart`: Creating and managing user shopping carts.
+  - `/api/CartItem`: Adding, updating, and removing specific items within a cart.
+- **Orders & Checkout:**
+  - `/api/Order`: Placing and tracking active shipment purchases.
+  - `/api/OrderItem`: Exploring specific items within placed orders.
+  - `/api/Payment`: Communicating Webhook calls from Paymob transactions.
+- **Engagement & Feedback:**
+  - `/api/Review`: User reviews and ratings for products.
+  - `/api/Report`: Operations for reporting issues (e.g., inappropriate reviews or system issues).
 
 *(Detailed schemas and models can be analyzed interactively within the Swagger UI).*
 
