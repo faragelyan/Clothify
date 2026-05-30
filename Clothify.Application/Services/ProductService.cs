@@ -96,7 +96,7 @@ namespace Clothify.Application.Services
         public async Task<Result<IReadOnlyList<ProductDto>>> GetAllAsync()
         {
             var products = await _unitOfWork.Products.GetAllEntitiesAsync(
-                orderBy: q => q.OrderByDescending(p => p.CreatedAt),
+                orderBy: q => q.OrderByDescending(p => p.Name),
                 disableTracking: true
             );
 
