@@ -8,10 +8,17 @@
 
 Clothify is a robust, scalable, and modern E-commerce backend designed to handle scalable online retail operations. Built on **ASP.NET Core** utilizing strict **Clean Architecture** principles, this API serves as the rock-solid foundation for advanced storefront applications, featuring secure user authentication, product management, seamless cart operations, and integrated payment gateways. The entire platform is fully containerized using **Docker** to ensure rapid, consistent deployments across any environment.
 
+## 🚀 Live Deployment
+
+The database and API are currently deployed and hosted on **MonsterASP.net**. You can explore the live Swagger documentation and test the endpoints directly here:
+
+👉 **[Live API Documentation (Swagger)](https://clothify.runasp.net/index.html)**
+
 ---
 
 ## Table of Contents
 
+- [Live Deployment](#-live-deployment)
 - [Core Features](#core-features)
 - [Architecture Diagram](#architecture)
 - [Technologies Used](#technologies-used)
