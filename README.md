@@ -4,8 +4,9 @@
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-Web_API-blue?style=flat-square)
 ![Entity Framework Core](https://img.shields.io/badge/EF_Core-ORM-68217A?style=flat-square)
 ![SQL Server](https://img.shields.io/badge/SQL_Server-Database-CC292B?style=flat-square)
+![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED?style=flat-square&logo=docker&logoColor=white)
 
-Clothify is a robust, scalable, and modern E-commerce backend designed to handle scalable online retail operations. Built on **ASP.NET Core** utilizing strict **Clean Architecture** principles, this API serves as the rock-solid foundation for advanced storefront applications, featuring secure user authentication, product management, seamless cart operations, and integrated payment gateways.
+Clothify is a robust, scalable, and modern E-commerce backend designed to handle scalable online retail operations. Built on **ASP.NET Core** utilizing strict **Clean Architecture** principles, this API serves as the rock-solid foundation for advanced storefront applications, featuring secure user authentication, product management, seamless cart operations, and integrated payment gateways. The entire platform is fully containerized using **Docker** to ensure rapid, consistent deployments across any environment.
 
 ---
 
@@ -24,6 +25,7 @@ Clothify is a robust, scalable, and modern E-commerce backend designed to handle
 ## Core Features
 
 - **Maintainable Codebase:** Enforces Clean Architecture to guarantee absolute separation of concerns.
+- **Containerized Ready:** Fully containerized using **Docker** for consistent, environment-agnostic deployments and effortless local setup.
 - **Secure Authentication:** Leverages ASP.NET Core Identity with **JWT** (JSON Web Tokens) Bearer token authentication, complete with forgotten password and email verification workflows.
 - **Comprehensive E-commerce Workflows:**
   - **Catalogue Management:** Full CRUD operations for Products, Brands, Sizes, and Categories.
@@ -66,6 +68,7 @@ The presentation layer. Exposes RESTful API endpoints securely to the public int
 | **Mappers & Validators** | AutoMapper, FluentValidation |
 | **Payment Gateway** | Paymob SDK / REST API |
 | **Documentation** | Swagger / OpenAPI |
+| **Containerization** | **Docker** |
 
 ---
 
@@ -81,7 +84,7 @@ The presentation layer. Exposes RESTful API endpoints securely to the public int
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/Clothify.git
+   git clone https://github.com/faragelyan/Clothify.git
    cd Clothify
    ```
 
@@ -103,6 +106,23 @@ The presentation layer. Exposes RESTful API endpoints securely to the public int
    dotnet run
    ```
    *Tip: Navigate to `https://localhost:<port>/swagger` in your browser to access the live, interactive Swagger UI portal.*
+
+### Running with Docker
+
+If you prefer to run the application using Docker, a `Dockerfile` is provided for the API layer.
+
+1. **Build the Docker Image:**
+   From the root directory of the repository, execute the following command:
+   ```bash
+   docker build -t clothify-api -f Clothify.API/Dockerfile .
+   ```
+
+2. **Run the Docker Container:**
+   Once the image is built, start a container. We recommend using an `.env` file to securely pass configurations like `ConnectionStrings__DefaultConnection` and `JWT__SigningKey`:
+   ```bash
+   docker run -d -p 8080:8080 --env-file .env --name clothify-api clothify-api
+   ```
+   *Note: If you don't use an `.env` file, you can pass variables directly using multiple `-e` flags.*
 
 ---
 
