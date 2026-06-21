@@ -1,5 +1,6 @@
 using Clothify.Application.DTOs.Size;
 using Clothify.Application.Interfaces;
+using Clothify.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace Clothify.API.Controllers
             _sizeService = sizeService;
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateSizeDto dto)
         {
@@ -27,6 +29,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Size created successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateSizeDto dto)
         {
@@ -37,6 +40,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Size updated successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -47,6 +51,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Size deleted successfully." });
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -57,6 +62,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Sizes retrieved successfully.", data = result.Data });
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

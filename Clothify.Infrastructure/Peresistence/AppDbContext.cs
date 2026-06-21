@@ -1,3 +1,4 @@
+using Clothify.Domain.Constants;
 using Clothify.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -57,14 +58,14 @@ namespace Clothify.Infrastructure.Peresistence
                 new IdentityRole<Guid>
                 {
                     Id = adminRoleId,
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
+                    Name = Clothify.Domain.Constants.Roles.Admin,
+                    NormalizedName = Clothify.Domain.Constants.Roles.Admin.ToUpper()
                 },
                 new IdentityRole<Guid>
                 {
                     Id = userRoleId,
-                    Name = "User",
-                    NormalizedName = "USER"
+                    Name = Clothify.Domain.Constants.Roles.User,
+                    NormalizedName = Clothify.Domain.Constants.Roles.User.ToUpper()
                 }
             );
 

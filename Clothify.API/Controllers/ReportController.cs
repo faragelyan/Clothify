@@ -1,5 +1,6 @@
 using Clothify.Application.DTOs.Report;
 using Clothify.Application.Interfaces;
+using Clothify.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Report created successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -37,6 +39,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Report deleted successfully." });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetAllByUserId(Guid userId)
         {
@@ -47,6 +50,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Reports retrieved successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

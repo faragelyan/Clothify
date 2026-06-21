@@ -3,6 +3,7 @@ using Clothify.Application.DTOs;
 using Clothify.Application.DTOs.Auth;
 using Clothify.Application.DTOs.User;
 using Clothify.Application.Interfaces;
+using Clothify.Domain.Constants;
 using Clothify.Domain.Entities;
 using Clothify.Domain.Interfaces;
 using Google.Apis.Auth;
@@ -107,7 +108,7 @@ namespace Clothify.Infrastructure.AuthenticationServices
             var result = await _userManager.CreateAsync(user, request.Password);
             if (!result.Succeeded) return new RegisterResponseDto { Message = "Registration failed." };
 
-            await _userManager.AddToRoleAsync(user, "User");
+            await _userManager.AddToRoleAsync(user, Roles.User);
 
             _unitOfWork.PendingVerifications.Delete(pending);
             await _unitOfWork.CommitAsync();
@@ -154,7 +155,7 @@ namespace Clothify.Infrastructure.AuthenticationServices
             var result = await _userManager.CreateAsync(newUser);
             if (!result.Succeeded) return new RegisterResponseDto { Message = "Registration failed." };
 
-            await _userManager.AddToRoleAsync(newUser, "User");
+            await _userManager.AddToRoleAsync(newUser, Roles.User);
             return new RegisterResponseDto { Message = "Registration succeeded!" };
         }
 

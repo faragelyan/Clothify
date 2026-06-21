@@ -1,5 +1,6 @@
 using Clothify.Application.DTOs.Review;
 using Clothify.Application.Interfaces;
+using Clothify.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,6 +48,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Review deleted successfully." });
         }
 
+        [AllowAnonymous]
         [HttpGet("product/{productId}")]
         public async Task<IActionResult> GetAllByProductId(Guid productId)
         {
@@ -57,6 +59,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Reviews retrieved successfully.", data = result.Data });
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

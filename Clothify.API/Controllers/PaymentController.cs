@@ -1,5 +1,6 @@
 using Clothify.Application.DTOs.Payment;
 using Clothify.Application.Interfaces;
+using Clothify.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Clothify.API.Controllers
             _paymentGatewayService = paymentGatewayService;
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePaymentDto dto)
         {
@@ -29,6 +31,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Payment created successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdatePaymentDto dto)
         {
@@ -39,6 +42,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Payment updated successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -49,6 +53,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Payment deleted successfully." });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

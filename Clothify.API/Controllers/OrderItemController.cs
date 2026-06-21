@@ -1,5 +1,6 @@
 using Clothify.Application.DTOs.OrderItem;
 using Clothify.Application.Interfaces;
+using Clothify.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Order item created successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateOrderItemDto dto)
         {
@@ -37,6 +39,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "Order item updated successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{orderId}/{productId}")]
         public async Task<IActionResult> Delete(Guid orderId, Guid productId)
         {

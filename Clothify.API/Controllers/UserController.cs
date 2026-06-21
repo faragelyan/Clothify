@@ -1,5 +1,6 @@
 using Clothify.Application.DTOs.User;
 using Clothify.Application.Interfaces;
+using Clothify.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace Clothify.API.Controllers
             _userService = userService;
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserDto dto)
         {
@@ -37,6 +39,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "User updated successfully.", data = result.Data });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -47,6 +50,7 @@ namespace Clothify.API.Controllers
             return Ok(new { message = "User deleted successfully." });
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
